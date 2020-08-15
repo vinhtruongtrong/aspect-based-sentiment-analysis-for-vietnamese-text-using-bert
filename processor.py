@@ -80,7 +80,7 @@ class VLSP_2018_single_Processor(DataProcessor):
 
     def get_labels(self):
         """See base class."""
-        return ['positive', 'neutral', 'negative', 'none']
+        return ['tích_cực', 'trung_lập', 'tiêu_cực', 'không_có']
 
     def _create_examples(self, lines, set_type):
         """Creates examples for the training and dev sets."""
@@ -120,7 +120,7 @@ class VLSP_2018_NLI_M_Processor(DataProcessor):
 
     def get_labels(self):
         """See base class."""
-        return ['positive', 'neutral', 'negative', 'none']
+        return ['tích_cực', 'trung_lập', 'tiêu_cực', 'không_có']
 
     def _create_examples(self, lines, set_type):
         """Creates examples for the training and dev sets."""
@@ -161,7 +161,7 @@ class VLSP_2018_QA_M_Processor(DataProcessor):
 
     def get_labels(self):
         """See base class."""
-        return ['positive', 'neutral', 'negative', 'none']
+        return ['tích_cực', 'trung_lập', 'tiêu_cực', 'không_có']
 
     def _create_examples(self, lines, set_type):
         """Creates examples for the training and dev sets."""
