@@ -95,10 +95,10 @@ class GeneratorDataSet(object):
         for i in range(len(clean_data)):
             clean_data[i].to_csv(str('{}/{}.csv'.format(directory, os.path.basename(files[i]))), index=False, encoding="utf-8-sig")
             generated_data = auxiliary_maker.make_auxiliary_sentences(clean_data[i], os.path.basename(files[i]))
-            generated_data['qa_m'].to_csv(str('{}/{}.csv'.format(qa_m_directory, os.path.basename(files[i]))), index=False, encoding="utf-8-sig")
-            generated_data['qa_b'].to_csv(str('{}/{}.csv'.format(qa_b_directory, os.path.basename(files[i]))), index=False, encoding="utf-8-sig")
-            generated_data['nli_m'].to_csv(str('{}/{}.csv'.format(nli_m_directory, os.path.basename(files[i]))), index=False, encoding="utf-8-sig")
-            generated_data['nli_b'].to_csv(str('{}/{}.csv'.format(nli_b_directory, os.path.basename(files[i]))), index=False, encoding="utf-8-sig")
+            generated_data['qa_m'].to_csv(str('{}/{}.csv'.format(qa_m_directory, os.path.basename(files[i]))), sep='\t',index=False, header=False, encoding="utf-8-sig")
+            generated_data['qa_b'].to_csv(str('{}/{}.csv'.format(qa_b_directory, os.path.basename(files[i]))), sep='\t',index=False, header=False, encoding="utf-8-sig")
+            generated_data['nli_m'].to_csv(str('{}/{}.csv'.format(nli_m_directory, os.path.basename(files[i]))), sep='\t',index=False, header=False, encoding="utf-8-sig")
+            generated_data['nli_b'].to_csv(str('{}/{}.csv'.format(nli_b_directory, os.path.basename(files[i]))), sep='\t',index=False, header=False, encoding="utf-8-sig")
 
         print("completed")     
         
