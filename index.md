@@ -1,8 +1,10 @@
 # Aspect based sentiment analysis for Vietnamese text using BERT
 
 You can download **VLSP 2018 dataset** [following this page](https://vlsp.org.vn/resources-vlsp2018).  
-**BERT base pre-train model** [following this page](https://github.com/google-research/bert). 
-**Pho-BERT pre-train model** [following this page](https://github.com/VinAIResearch/PhoBERT). 
+
+Pre-train model: 
+- **BERT base pre-train model** [following this page](https://github.com/google-research/bert) then convert it to pytorch-model, it will require tensorflow: 1.13.1.
+- **Pho-BERT pre-train model** [following this page](https://github.com/VinAIResearch/PhoBERT). 
 
 This project is run on Google Colab environment. Link [notebook](https://colab.research.google.com/drive/1Ol6dRdMHODp0rlPgbZc0OIAgrmm9eZB4?usp=sharing) 
 
