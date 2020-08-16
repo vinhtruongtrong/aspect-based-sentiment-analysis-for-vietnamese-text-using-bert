@@ -73,7 +73,7 @@ python run_classifier_RoBERTa_TABSA.py \
 ```
 _Train phase may throw exception if the result directory was exist_
 
-##Evaluation
+## Evaluation
 While train phase it will create result file (*.txt) after each epoch. 
 Run this script to evaluate result
 ```
@@ -82,6 +82,6 @@ python evaluation.py \
 --pred_data_dir [predict label file *.txt] \
 --domain [domain]
 ```
-### Contact
+## Contact
 
 Having trouble with project? Post it on issues or contact this email: vinh.truongtrong@gmail.com and i’ll help you sort it out.
