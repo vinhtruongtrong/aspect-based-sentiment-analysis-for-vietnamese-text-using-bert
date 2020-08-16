@@ -1,37 +1,87 @@
-## Welcome to GitHub Pages
+# Aspect based sentiment analysis for Vietnamese text using BERT
 
-You can use the [editor on GitHub](https://github.com/vinhtruongtrong/aspect-based-sentiment-analysis-for-vietnamese-text-using-bert/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+You can download **VLSP 2018 dataset** [following this page](https://vlsp.org.vn/resources-vlsp2018).  
+**BERT base pre-train model** [following this page](https://github.com/google-research/bert). 
+**Pho-BERT pre-train model** [following this page](https://github.com/VinAIResearch/PhoBERT). 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This project is run on Google Colab environment. 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Before run project you must install some ensential packages by run this script:
 ```
+pip install -r requirements.txt
+```
+## Generate data
+```
+python generator.py --data_path [raw data path] --output_path [output path] --domain [domain]
+```
+- **[raw data path]**: directory of your VLSP 2018 dataset (file *.txt)
+- **[output path]**: directory when save data that use to train phase (file *.csv)
+- **[domain]**: restaurant or hotel, to generate auxiliary sentences base on number of corresponding aspect
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Training
+### Prepare dataset path
+Before training we copy dataset ([train], [test], [dev]) into one folder and rename it following this rule:  
+```
+[name]_[method].csv
+```
+with:  
+- **[name]** is train, test or dev
+- **[method]** is QA_M, QA,B, NLI_M, NLI_B
+for example you want train with method QA_M, your dataset file with look like
+```
+dataset
+  train_QA_M.csv
+  dev_QA_M.csv
+  test_QA_M.csv
+```
+### Train phase
+run this script to train with BERT base pre-train model
+```
+python run_classifier_TABSA.py \
+--task_name [task name] \
+--data_dir [directory of data] \
+--vocab_file [vocab.txt file of pre-train model] \
+--bert_config_file [bert_config.json file] \
+--init_checkpoint [init check point] \
+--do_save_model \
+--eval_test \
+--do_lower_case \
+--max_seq_length [max sequence length] \
+--train_batch_size [bath size] \
+--learning_rate 2e-5 \
+--num_train_epochs [epochs] \
+--output_dir [directory of result] \
+--seed 42
+```
+run this script to train with Pho-BERT pre-train model
+```
+python run_classifier_RoBERTa_TABSA.py \
+--task_name [task name] \
+--data_dir [directory of data] \
+--vocab_file [vocab.txt file of pre-train model] \
+--bert_config_file [bert_config.json file] \
+--init_checkpoint [init check point] \
+--do_save_model \
+--eval_test \
+--do_lower_case \
+--max_seq_length [max sequence length] \
+--train_batch_size [bath size] \
+--learning_rate 2e-5 \
+--num_train_epochs [epochs] \
+--output_dir [directory of result] \
+--seed 42
+```
+_Train phase may throw exception if the result directory was exist_
 
-### Jekyll Themes
+##Evaluation
+While train phase it will create result file (*.txt) after each epoch. 
+Run this script to evaluate result
+```
+python evaluation.py \
+--task_name [task name] --true_data_dir [true label directory] \
+--pred_data_dir [predict label file *.txt] \
+--domain [domain]
+```
+### Contact
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vinhtruongtrong/aspect-based-sentiment-analysis-for-vietnamese-text-using-bert/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Having trouble with project? Post it on issues or contact this email: vinh.truongtrong@gmail.com and i’ll help you sort it out.
