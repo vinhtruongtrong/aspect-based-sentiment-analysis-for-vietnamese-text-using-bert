@@ -4,7 +4,7 @@ You can download **VLSP 2018 dataset** [following this page](https://vlsp.org.vn
 **BERT base pre-train model** [following this page](https://github.com/google-research/bert). 
 **Pho-BERT pre-train model** [following this page](https://github.com/VinAIResearch/PhoBERT). 
 
-This project is run on Google Colab environment. 
+This project is run on Google Colab environment. Link [notebook](https://colab.research.google.com/drive/1Ol6dRdMHODp0rlPgbZc0OIAgrmm9eZB4?usp=sharing) 
 
 Before run project you must install some ensential packages by run this script:
 ```
