@@ -26,6 +26,7 @@ def vlsp_2018_PRF(y_true, y_pred, domain):
             if y_true[i*total_available_aspects+j]!=3:
                 g.add(j)
         if len(g)==0:continue
+        #get all index != 3 (None) then intersection 2 list
         s_g=s.intersection(g)
         s_all+=len(s)
         g_all+=len(g)
