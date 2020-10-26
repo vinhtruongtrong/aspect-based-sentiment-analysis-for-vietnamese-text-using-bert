@@ -89,11 +89,11 @@ def get_y_pred(task_name, pred_data_dir):
                     for i in range(4):
                         t.append(tmp[i] / tmp_sum)
                     score.append(t)
-                    if t[0] >= t[1] and t[0] >= t[2] and t[0]>=t[3] and t[0]>=t[4]:
+                    if t[0] >= t[1] and t[0] >= t[2] and t[0]>=t[3]:
                         pred.append(0)
-                    elif t[1] >= t[0] and t[1] >= t[2] and t[1]>=t[3] and t[1]>=t[4]:
+                    elif t[1] >= t[0] and t[1] >= t[2] and t[1]>=t[3]:
                         pred.append(1)
-                    elif t[2] >= t[0] and t[2] >= t[1] and t[2]>=t[3] and t[2]>=t[4]:
+                    elif t[2] >= t[0] and t[2] >= t[1] and t[2]>=t[3]:
                         pred.append(2)
                     else:
                         pred.append(3)
@@ -185,13 +185,16 @@ def main():
     aspect_P, aspect_R, aspect_F = vlsp_2018_PRF(y_true, y_pred, args.domain)
     sentiment_Acc_3_classes = vlsp_2018_Acc(y_true, y_pred, score, 3)
     f1_micro = f1_score(y_true, y_pred, average='micro')
+    f1_macro = f1_score(y_true, y_pred, average='macro')
+
 
     result = {
             'aspect_P': aspect_P,
             'aspect_R': aspect_R,
             'aspect_F': aspect_F,
             'sentiment_accuracy': sentiment_Acc_3_classes,
-            'f1': f1_micro
+            'f1': f1_micro,
+            'f1_macro': f1_macro
     }
 
     for key in result.keys():

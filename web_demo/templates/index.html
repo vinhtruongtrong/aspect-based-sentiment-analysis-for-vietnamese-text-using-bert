@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Demo Application</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div style="background-image: url('https://www.itl.cat/pngfile/big/73-736986_available-desktop-resolutions-material-design-pattern-background.jpg');">
+            <div class="row w-100 h-100 justify-content-center align-items-center">
+                <div class="rounded" style="width: 30%; background-color: whitesmoke; padding: 24px;">
+                    <div class="form-group">
+                        <h2>Aspect Sentiment Based Analysis for Vietnamese Text Demo</h2>
+                        <hr/>
+                        <label for="sentencesTextField">Enter your sentences</label>
+                        <textarea class="form-control" id="sentencesTextField" rows="5" style="resize: none;"></textarea>
+                        <label class="radio-inline" style="margin-top: 16px; margin-right: 16px;"><input type="radio" name="optradio" checked> Hotel</label>
+                        <label class="radio-inline" style="margin-top: 16px; margin-right: 16px;"><input type="radio" name="optradio"> Restaurant</label>
+                    </div>
+                    
+                    <button class="btn btn-primary " type="button" onclick='handleBtnSubmitClicked()'>
+                        Submit
+                      </button>
+                      <hr/>
+                      <div class="form-group" style="margin-top: 24px; height: max-content;">
+                        <label>Result:</label>
+                        <div class="card card-body">
+                            <pre class="pre-scrollable" id="resultTextView" style="overflow-y: scroll; max-lines: 5;">
+                            </pre>
+                        </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+
+    <script>
+        async function handleBtnSubmitClicked () {
+            var sentence = $('textarea#sentencesTextField').val()
+            var jsonBody= JSON.stringify({"sentence": sentence});
+            console.log(jsonBody)
+            const rawResponse = await fetch('http://localhost:1203/api/predict', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: jsonBody
+            });
+            const jsonResponse = await rawResponse.json().then((jsonResponse)=>{
+                var outputs = JSON.stringify(jsonResponse.result).split(',').join("\r\n").replace('{', '').replace('}','');
+                console.log(JSON.stringify(jsonResponse));
+                $('#resultTextView').text(outputs);
+            });
+        }
+    </script>
+</html>
